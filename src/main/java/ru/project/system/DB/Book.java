@@ -1,5 +1,7 @@
 package ru.project.system.DB;
 
+import ru.project.system.controller.MainLibraryController;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -24,29 +26,27 @@ public class Book {
         bookDataBase.add(book);
     }
 
-    public static void removeBook(Book book) {
-        bookDataBase.remove(book);
+    public static void takeBook(int id, String name) {
+        for (Book book : bookDataBase) {
+            if (book.getId() == id) {
+                book.setReader(name);
+                book.setStatus(Status.WAIT_ISSUE);
+            }
+
+        }
+        MainLibraryController.resfreshTable();
     }
 
-    public static Book getBook(Book book, Status status) {
-        for (Book value : bookDataBase) {
-            if (value.equals(book)) {
-                return value;
+    public static void returnBook(int id){
+        for (Book book : bookDataBase) {
+            if (book.getId() == id) {
+                book.setStatus(Status.WAIT_REFUND);
             }
         }
-        return null;
+        MainLibraryController.resfreshTable();
     }
 
-    public static void changeStatus(Book book, Status status) {
-        for (int i = 0; i < bookDataBase.size(); i++) {
-            if (bookDataBase.get(i).equals(book)) {
-                Book newBook = bookDataBase.get(i);
-                newBook.setStatus(status);
-                bookDataBase.remove(book);
-                bookDataBase.add(i, newBook);
-            }
-        }
-    }
+
 
     @Override
     public boolean equals(Object o) {
