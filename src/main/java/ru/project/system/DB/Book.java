@@ -37,7 +37,28 @@ public class Book {
         MainLibraryController.resfreshTable();
     }
 
-    public static void returnBook(int id){
+    public static void giveBook(int id) {
+        for (Book book : bookDataBase) {
+            if (book.getId() == id) {
+                book.setStatus(Status.TAKEN);
+            }
+
+        }
+        MainLibraryController.resfreshTable();
+    }
+
+    public static void acceptBook(int id) {
+        for (Book book : bookDataBase) {
+            if (book.getId() == id) {
+                book.setStatus(Status.STOCK);
+                book.setReader("---");
+            }
+
+        }
+        MainLibraryController.resfreshTable();
+    }
+
+    public static void returnBook(int id) {
         for (Book book : bookDataBase) {
             if (book.getId() == id) {
                 book.setStatus(Status.WAIT_REFUND);

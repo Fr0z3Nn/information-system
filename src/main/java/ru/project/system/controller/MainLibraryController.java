@@ -6,7 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import ru.project.system.DB.Book;
@@ -73,29 +76,32 @@ public class MainLibraryController {
         });
 
         takeBook.setOnMouseClicked(event -> {
-            Stage stage = new Stage();
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("/takeBook.fxml"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+           newScene("/takeBook.fxml");
         });
 
         returnBook.setOnMouseClicked(event -> {
-            Stage stage = new Stage();
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("/returnBook.fxml"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            newScene("/returnBook.fxml");
         });
+
+        giveBook.setOnMouseClicked(event -> {
+           newScene("/giveBook.fxml");
+        });
+
+        acceptBook.setOnMouseClicked(event -> {
+            newScene("/acceptBook.fxml");
+        });
+    }
+
+    private void newScene(String url) {
+        Stage stage = new Stage();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource(url));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
