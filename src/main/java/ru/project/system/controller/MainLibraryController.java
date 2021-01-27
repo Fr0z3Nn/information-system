@@ -27,6 +27,8 @@ public class MainLibraryController {
     @FXML
     public Button acceptBook;
     @FXML
+    public TableColumn<Book, Integer> idBook;
+    @FXML
     public TableColumn<Book, String> nameBook;
     @FXML
     public TableColumn<Book, String> authorBook;
@@ -40,6 +42,7 @@ public class MainLibraryController {
 
     @FXML
     public void initialize() {
+        idBook.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameBook.setCellValueFactory(new PropertyValueFactory<>("name"));
         authorBook.setCellValueFactory(new PropertyValueFactory<>("author"));
         statusBook.setCellValueFactory(new PropertyValueFactory<>("status"));

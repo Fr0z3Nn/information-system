@@ -5,13 +5,15 @@ import java.util.Objects;
 
 public class Book {
     public static ArrayList<Book> bookDataBase = new ArrayList<>();
-
+    private static Integer count = 0;
+    private Integer id;
     private String name;
     private String author;
     private Status status;
     private String reader;
 
     public Book(String name, String author, Status status, String reader) {
+        this.id = count++;
         this.name = name;
         this.author = author;
         this.status = status;
@@ -92,5 +94,21 @@ public class Book {
 
     public void setReader(String reader) {
         this.reader = reader;
+    }
+
+    public static Integer getCount() {
+        return count;
+    }
+
+    public static void setCount(Integer count) {
+        Book.count = count;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

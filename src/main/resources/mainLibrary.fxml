@@ -11,7 +11,8 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.project.system.controller.MainLibraryController">
     <TableView fx:id="table" layoutX="14.0" layoutY="128.0" prefHeight="254.0" prefWidth="569.0">
       <columns>
-          <TableColumn fx:id="nameBook" prefWidth="75.0" text="Книга" />
+         <TableColumn  fx:id="idBook" prefWidth="44.0" text="ID" />
+          <TableColumn fx:id="nameBook" prefWidth="183.0" text="Книга" />
           <TableColumn fx:id="authorBook" prefWidth="75.0" text="Автор" />
           <TableColumn fx:id="statusBook" prefWidth="75.0" text="Статус" />
           <TableColumn fx:id="readerBook" prefWidth="75.0" text="Читатель" />
