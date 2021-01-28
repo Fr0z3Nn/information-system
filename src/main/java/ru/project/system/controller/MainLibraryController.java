@@ -18,7 +18,9 @@ import ru.project.system.DB.Status;
 import java.io.IOException;
 
 public class MainLibraryController {
+
     private static TableView<Book> tableToRefresh;
+
     @FXML
     public PasswordField pass;
     @FXML
@@ -48,7 +50,9 @@ public class MainLibraryController {
             = FXCollections.observableArrayList();
 
     public static void resfreshTable(){
-        tableToRefresh.refresh();
+        if(tableToRefresh != null){
+            tableToRefresh.refresh();
+        }
     }
 
     @FXML
@@ -62,7 +66,7 @@ public class MainLibraryController {
         statusBook.setCellValueFactory(new PropertyValueFactory<>("status"));
         readerBook.setCellValueFactory(new PropertyValueFactory<>("reader"));
 
-        booksObservableList.setAll(Book.bookDataBase);
+        booksObservableList.setAll(Book.getBookDataBase());
         table.setItems(booksObservableList);
 
 

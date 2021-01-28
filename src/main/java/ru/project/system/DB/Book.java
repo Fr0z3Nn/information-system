@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Book {
-    public static ArrayList<Book> bookDataBase = new ArrayList<>();
+    private static ArrayList<Book> bookDataBase = new ArrayList<>();
     private static Integer count = 0;
     private Integer id;
     private String name;
     private String author;
+
+
     private Status status;
     private String reader;
 
@@ -131,5 +133,9 @@ public class Book {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public static ArrayList<Book> getBookDataBase() {
+        return bookDataBase;
     }
 }
