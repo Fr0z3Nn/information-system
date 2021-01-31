@@ -66,7 +66,6 @@ public class Controller {
         for (int i = 0; i < 100; i++) {
             desp += Math.pow((i - mathOzhNewGen), 2) * (genNewRes.get(i) / 10000.);
         }
-        System.out.println(desp);
         dispers.setText(String.format("Дисперсия: %.4f", desp));
 
     }

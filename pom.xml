@@ -44,8 +44,9 @@
                         <configuration>
                             <archive>
                                 <manifest>
+                                    <addClasspath>true</addClasspath>
                                     <mainClass>
-                                        ru.project.system.generator.StartGen
+                                        ru.project.system.StartGen
                                     </mainClass>
                                 </manifest>
                             </archive>

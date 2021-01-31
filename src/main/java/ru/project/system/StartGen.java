@@ -1,4 +1,4 @@
-package ru.project.system.generator;
+package ru.project.system;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
