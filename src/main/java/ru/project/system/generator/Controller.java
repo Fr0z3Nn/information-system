@@ -5,6 +5,7 @@ import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import java.util.Map;
@@ -23,10 +24,11 @@ public class Controller {
     public Text dispers;
     @FXML
     public Text pi;
+    @FXML
+    public TextField NValue;
 
     @FXML
     public void initialize() {
-
         rateGraph.getXAxis().setLabel("Число");
         rateGraph.getYAxis().setLabel("Частота появления");
         rateGraph.setBarGap(0);
@@ -35,22 +37,33 @@ public class Controller {
         diffFunc.getYAxis().setLabel("Плотность вероятности");
         diffFunc.getXAxis().setLabel("Число");
         diffFunc.setTitle("Интегральная функция распределения");
-        setAllData();
-        pi.setText("Число PI: " + Generator.pi());
         genButton.setOnMouseClicked(event -> {
             setAllData();
         });
     }
 
     private void setAllData() {
-        Map<Integer, Integer> genNewRes = Generator.genMeth();
+        double numVarioty;
+        System.out.println(NValue.getText());
+        if (NValue.getText().equals("")) {
+            numVarioty = 10000;
+        } else {
+            numVarioty = Double.parseDouble(NValue.getText());
+        }
+        Map<Integer, Integer> genNewRes = Generator.genMeth((int) numVarioty);
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName(String.valueOf(++count));
         double verNew = 0;
         XYChart.Series<String, Number> diffSeriesNew = new XYChart.Series<>();
         for (int i = 0; i < 100; i++) {
-            series.getData().add(new XYChart.Data<>(String.valueOf(i), genNewRes.get(i)));
-            diffSeriesNew.getData().add(new XYChart.Data<>(String.valueOf(i), verNew += genNewRes.get(i) / 10000.));
+            int numGET;
+            try {
+                numGET = genNewRes.get(i);
+            } catch (Exception e) {
+                numGET = 0;
+            }
+            series.getData().add(new XYChart.Data<>(String.valueOf(i), numGET));
+            diffSeriesNew.getData().add(new XYChart.Data<>(String.valueOf(i), verNew += numGET / numVarioty));
         }
         // Add Series to BarChart.
         rateGraph.getData().add(series);
@@ -58,15 +71,27 @@ public class Controller {
 
         double mathOzhNewGen = 0;
         for (int i = 0; i < 100; i++) {
-            mathOzhNewGen += i * genNewRes.get(i) / 10000.;
+            int numGET;
+            try {
+                numGET = genNewRes.get(i);
+            } catch (Exception e) {
+                numGET = 0;
+            }
+            mathOzhNewGen += i * numGET / numVarioty;
         }
         mathozh.setText(String.format("Мат. ожидание: %.4f", mathOzhNewGen));
 
         double desp = 0;
         for (int i = 0; i < 100; i++) {
-            desp += Math.pow((i - mathOzhNewGen), 2) * (genNewRes.get(i) / 10000.);
+            int numGET;
+            try {
+                numGET = genNewRes.get(i);
+            } catch (Exception e) {
+                numGET = 0;
+            }
+            desp += Math.pow((i - mathOzhNewGen), 2) * (numGET / numVarioty);
         }
         dispers.setText(String.format("Дисперсия: %.4f", desp));
-
+        pi.setText("Число PI: " + Generator.pi((int)numVarioty));
     }
 }

@@ -4,5 +4,5 @@ import ru.project.system.generator.Generator;
 public class GenTest {
     @Test
     public void gen(){
-        System.out.println(Generator.genMeth());
+        System.out.println(Generator.genMeth(1000));
     }}
